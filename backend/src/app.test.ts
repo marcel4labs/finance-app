@@ -19,3 +19,16 @@ describe("GET /api/transactions", () => {
     expect(Array.isArray(res.body)).toBe(true);
   });
 });
+
+describe("POST /api/transactions", () => {
+  it("it create a item in transactions", async () => {
+    const res = await request(app).post("/api/transactions").send({
+      type: "expense",
+      amount_cents: 3000,
+      description: "Mercado",
+      date: "2026-11-15",
+    });
+    expect(res.status).toBe(201);
+    expect(typeof res.body.id).toBe("number");
+  });
+});
